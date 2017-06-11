@@ -1,3 +1,10 @@
+"""
+Common pratice of OOP
+"""
+
+import shelve
+
+
 class ModelHelper:
     def __repr__(self):
         """交互提示模式下的显示重载"""
@@ -6,14 +13,30 @@ class ModelHelper:
         attrs = '\n'.join(a)
         return '<class %s>\n%s' % (class_name, attrs)
 
-    def __str__(self):
-        a = ['{}={}'.format(k, getattr(self, k)) for k in sorted(self.__dict__)]
-        attrs = ', '.join(a)
-        r = '[{}> {}: {}]'.format(self.__class__.__bases__,
-                                  self.__class__.__name__,
-                                  attrs)
-        return r
+    def _get_attrs(self):
+        """单下划线开头一般就能避免被子类方法命名冲突"""
+        attrs = ['{}={}'.format(k, getattr(self, k)) for k in sorted(self.__dict__)]
+        return ', '.join(attrs)
 
+    def __str__(self):
+        formatter = '[{}> {}: {}]'.format(self.__class__.__bases__,
+                                  self.__class__.__name__,
+                                  self._get_attrs())
+        return formatter
+
+    def __private(self):
+        """fake private: 强行访问只能通过 _ModelHelper__private 这样的方式"""
+        print('You should not see this.')
+
+    def save(self):
+        """
+        实例持久化的方法:
+            keys have to be str and unique,
+            values can be any Python objects.
+        """
+        db = shelve.open('persondb')
+        db[self.name] = self
+        db.close()
 
 
 class Person(ModelHelper):
@@ -76,7 +99,6 @@ class Department:
 def test_person():
     bob = Person('Bob Smith')
     print(bob)
-    bob.give_raise(0.10)
     assert bob.name == 'Bob Smith'
     assert bob.job is None
     assert bob.pay is 0
@@ -87,8 +109,6 @@ def test_manager():
     tom = Manager('Tom Clues', 50000)
     print(tom)
     assert tom.last_name() == 'Clues'
-    tom.give_raise(0.05)
-    assert tom.pay == 57500
     tom.scream()
     Manager.scream()
     return tom
@@ -98,8 +118,6 @@ def test_developer():
     sue = Developer('Sue Jones', pay=100000)
     print(sue)
     assert sue.job == 'developer'
-    sue.give_raise(.1)
-    assert sue.pay == 110000
     return sue
 
 
@@ -113,13 +131,28 @@ def test_department():
     d.add_member(sue)
     d.show_all()
     assert d.members == [bob, tom, sue]
+    return bob, tom, sue
+
+
+def test_save_and_update_ins():
+    db = shelve.open('persondb')
+    mike = db['Mike Zheng']
+    pay = mike.pay
+    mike.give_raise(0.2)
+    assert mike.pay == pay * 1.2
+    mike.save()
 
 
 def test():
     # test_person()
     # test_manager()
     # test_developer()
-    test_department()
+    # test_department()
+    test_save_and_update_ins()
+
+
+mike = Developer('Mike Zheng', pay=5500)
+mike.save()
 
 
 if __name__ == '__main__':
