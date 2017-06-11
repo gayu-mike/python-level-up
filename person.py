@@ -6,6 +6,15 @@ class ModelHelper:
         attrs = '\n'.join(a)
         return '<class %s>\n%s' % (class_name, attrs)
 
+    def __str__(self):
+        a = ['{}={}'.format(k, getattr(self, k)) for k in sorted(self.__dict__)]
+        attrs = ', '.join(a)
+        r = '[{}> {}: {}]'.format(self.__class__.__bases__,
+                                  self.__class__.__name__,
+                                  attrs)
+        return r
+
+
 
 class Person(ModelHelper):
     def __init__(self, name, job=None, pay=0):
@@ -38,7 +47,7 @@ class Manager(Person):
         print('你把这个功能改一下，很简单的！')
 
 
-class Developer:
+class Developer(ModelHelper):
     """
     对象嵌入:
         这样基于嵌入的类，不会截获运算符重载方法
