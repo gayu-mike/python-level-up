@@ -26,36 +26,91 @@ class Person(ModelHelper):
 
 
 class Manager(Person):
+    def __init__(self, name, pay):
+        Person.__init__(self, name, 'manager', pay)
+
     def give_raise(self, percent, bonus=0.10):
         # self.pay = int(self.pay * (1 + percent + bonus))
         Person.give_raise(self, percent + bonus)
 
+    @staticmethod
+    def scream():
+        print('你把这个功能改一下，很简单的！')
+
+
+class Developer:
+    """
+    对象嵌入:
+        这样基于嵌入的类，不会截获运算符重载方法
+        如，需要重写 __str__ 否则打印会输出
+        <__main__.Developer object at 0x103812278>
+    """
+    def __init__(self, name, pay):
+        self.person = Person(name, 'developer', pay)
+
+    def __getattr__(self, attr):
+        return getattr(self.person, attr)
+
+
+class Department:
+    def __init__(self, *args):
+        self.members = list(args)
+
+    def add_member(self, person):
+        self.members.append(person)
+
+    def show_all(self):
+        for m in self.members:
+            print(m)
+
 
 def test_person():
     bob = Person('Bob Smith')
-    sue = Person('Sue Jones', job='dev', pay=100000)
-    for p in [bob, sue]:
-        print(p)
-        p.give_raise(0.10)
-
+    print(bob)
+    bob.give_raise(0.10)
     assert bob.name == 'Bob Smith'
     assert bob.job is None
-    assert sue.job == 'dev'
-    assert sue.pay == 110000
+    assert bob.pay is 0
+    return bob
 
 
 def test_manager():
-    tom = Manager('Tom Clues', 'mgr', 50000)
-    tom.give_raise(0.05)
+    tom = Manager('Tom Clues', 50000)
     print(tom)
-
     assert tom.last_name() == 'Clues'
+    tom.give_raise(0.05)
     assert tom.pay == 57500
+    tom.scream()
+    Manager.scream()
+    return tom
+
+
+def test_developer():
+    sue = Developer('Sue Jones', pay=100000)
+    print(sue)
+    assert sue.job == 'developer'
+    sue.give_raise(.1)
+    assert sue.pay == 110000
+    return sue
+
+
+def test_department():
+    bob = test_person()
+    tom = test_manager()
+    sue = test_developer()
+    print('{}{}{}'.format('-'*8, 'test_department', '-'*8))
+    d = Department(bob, tom)
+    d.show_all()
+    d.add_member(sue)
+    d.show_all()
+    assert d.members == [bob, tom, sue]
 
 
 def test():
     # test_person()
-    test_manager()
+    # test_manager()
+    # test_developer()
+    test_department()
 
 
 if __name__ == '__main__':
