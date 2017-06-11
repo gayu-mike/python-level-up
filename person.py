@@ -22,20 +22,40 @@ class Person(ModelHelper):
         return self.name.split()[-1]
 
     def give_raise(self, percent):
-        self.pay = int(self.pay * (1 + percent))
+        self.pay = round(self.pay * (1 + percent))
 
 
-def test():
+class Manager(Person):
+    def give_raise(self, percent, bonus=0.10):
+        # self.pay = int(self.pay * (1 + percent + bonus))
+        Person.give_raise(self, percent + bonus)
+
+
+def test_person():
     bob = Person('Bob Smith')
     sue = Person('Sue Jones', job='dev', pay=100000)
     for p in [bob, sue]:
         print(p)
-        p.give_raise(.1)
+        p.give_raise(0.10)
 
     assert bob.name == 'Bob Smith'
     assert bob.job is None
     assert sue.job == 'dev'
     assert sue.pay == 110000
+
+
+def test_manager():
+    tom = Manager('Tom Clues', 'mgr', 50000)
+    tom.give_raise(0.05)
+    print(tom)
+
+    assert tom.last_name() == 'Clues'
+    assert tom.pay == 57500
+
+
+def test():
+    # test_person()
+    test_manager()
 
 
 if __name__ == '__main__':
