@@ -15,13 +15,14 @@ class ModelHelper:
 
     def _get_attrs(self):
         """单下划线开头一般就能避免被子类方法命名冲突"""
-        attrs = ['{}={}'.format(k, getattr(self, k)) for k in sorted(self.__dict__)]
+        attrs = ['{}={}'.format(k, getattr(self, k))
+                 for k in sorted(self.__dict__)]
         return ', '.join(attrs)
 
     def __str__(self):
         formatter = '[{}> {}: {}]'.format(self.__class__.__bases__,
-                                  self.__class__.__name__,
-                                  self._get_attrs())
+                                          self.__class__.__name__,
+                                          self._get_attrs())
         return formatter
 
     def __private(self):
@@ -49,7 +50,7 @@ class Person(ModelHelper):
     def __str__(self):
         """print 运算符的重载"""
         return '[Person: %s, %s]' % (self.name, self.pay)
-    
+
     def last_name(self):
         return self.name.split()[-1]
 
