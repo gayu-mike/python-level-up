@@ -31,4 +31,3 @@ def best(func, *args, **kwargs):
 def only_time(*args, **kwargs):
     spend, __ = timer(*args, **kwargs)
     return spend
-

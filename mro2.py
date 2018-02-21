@@ -21,6 +21,7 @@ class B(A):
         self.x = 'b'
         print(self.x)
 
+
 class C(A):
     def __init__(self):
         print('Enter C')

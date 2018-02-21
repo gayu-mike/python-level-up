@@ -1,14 +1,18 @@
 x = 11
 
+
 def f():
     print(x)
+
 
 def g():
     x = 22
     print(x)
 
+
 class H:
     x = 33
+
     def i(self):
         x = 44
         self.x = 55

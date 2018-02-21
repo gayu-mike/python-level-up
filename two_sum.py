@@ -14,7 +14,7 @@ class MySolution:
         lookup = {}
         for i, x in enumerate(nums):
             if target - x in nums:
-                return lookup[target-x], i
+                return lookup[target - x], i
             lookup[x] = i
         return []
 
@@ -27,7 +27,7 @@ class MySolution:
                 else:
                     try:
                         index_i = nums.index(i)
-                        index_j = nums.index(j, index_i+1)
+                        index_j = nums.index(j, index_i + 1)
                     except ValueError:
                         pass
                     else:
@@ -47,9 +47,9 @@ class MySolution:
         for i in rev:
             # self.two_sum1(nums, i)
             for n, x in enumerate(nums):
-                if i-x in nums:
-                    if nums.index(i-x) > n:
-                        result.add((x, i-x, i))
+                if i - x in nums:
+                    if nums.index(i - x) > n:
+                        result.add((x, i - x, i))
         return result
 
     def three_sum2(self, nums, target=0):
@@ -64,7 +64,7 @@ class MySolution:
                     z = target - x - y
                     if z in nums:
                         try:
-                            __ = nums.index(z, i+1, index_y)
+                            __ = nums.index(z, i + 1, index_y)
                         except ValueError:
                             continue
                         else:

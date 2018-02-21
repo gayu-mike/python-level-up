@@ -52,6 +52,12 @@ if __name__ == '__main__':
     print(ml[1:])
     print(ml + ['eggs'])
     print(ml * 3)
-    ml.append('a'); print(ml)
-    ml.sort(); print(ml)
-    for i in ml: print(i, end=' ')
+
+    ml.append('a')
+    print(ml)
+
+    ml.sort()
+    print(ml)
+
+    for i in ml:
+        print(i, end=' ')

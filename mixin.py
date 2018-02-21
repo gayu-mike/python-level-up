@@ -29,7 +29,7 @@ class Mixin:
             )
         else:
             self.__visited[cls] = True
-            gen_above = (self.__clss(c, indent+4) for c in cls.__bases__)
+            gen_above = (self.__clss(c, indent + 4) for c in cls.__bases__)
             return '\n{}<Class {}: address {}:\n{}{}{}>\n'.format(
                 dots,
                 cls.__name__,

@@ -5,6 +5,7 @@ mydir.py: a module that lists the namespaces of other modules.
 seplen = 60
 sepchr = '-'
 
+
 def listing(module, verbose=True):
     sepline = sepchr * seplen
     if verbose:

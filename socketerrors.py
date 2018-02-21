@@ -28,7 +28,8 @@ except (socket.gaierror, socket.error) as e:
     sys.exit(1)
 
 try:
-    s.sendall('GET {} HTTP/1.1\r\nhost: {}\r\n\r\n'.format(filename, host).encode())
+    s.sendall('GET {} HTTP/1.1\r\nhost: {}\r\n\r\n'
+              .format(filename, host).encode())
 except OSError as e:
     print(e)
     sys.exit(1)
