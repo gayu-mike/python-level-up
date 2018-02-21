@@ -1,3 +1,5 @@
+#! usr/bin/evn python3
+
 """ A Python daemon
 
 Usage:
@@ -10,17 +12,24 @@ Usage:
         把要执行的任务以函数的形式放在下面的 `task()` 函数中，
     任务的定时器修改 `time.sleep()` 中的参数即可。然后 `python daemon.py`
     启动该守护进程。
-        如果要停止该守护进程，目前，只需 `killall python daemon.py` 即可。
+        如果要停止该守护进程，先 `ps axj | grep python` 找到改进程, 再 `kill` 即可。
 """
 
+
 import os
-import signal
+# import signal
 import sys
 import time
 
 
+def log():
+    with open('daemon.log', 'a+') as f:
+        f.write('hello world!\n')
+
+
 def task():
     time.sleep(3)
+    # log()
     # Your script here
 
 
