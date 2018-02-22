@@ -2,10 +2,12 @@
 
 """ A Python daemon
 使用:
-        把要执行的任务以函数的形式放在下面的 `task()` 函数中，
-    任务的定时器修改 `time.sleep()` 中的参数即可。然后 `python daemon.py`
-    启动该守护进程。
-        如果要停止该守护进程，先 `ps axj | grep python` 找到改进程, 再 `kill` 即可。
+    把要执行的脚本放在下面的 `Worker.run()` 函数中, 任务的定时器修改 `time.sleep()` 中的参数即可.
+命令:
+    `python daemon.py start` 启动
+    `python daemon.py stop` 终止
+    `python daemon.py restart` 重启
+    `python daemon.py check`
 """
 
 
@@ -84,7 +86,7 @@ class Daemon(object):
             return False
 
     def is_alive(self):
-        return self.status
+        return self.status()
 
     def get_pid(self):
         try:
@@ -101,16 +103,18 @@ class Daemon(object):
 class Worker(Daemon):
 
     def run(self):
-        def log():
-            with open('daemon.log', 'a+') as f:
-                f.write('hello world!\n')
+        # def log():
+        #     with open('daemon.log', 'a+') as f:
+        #         f.write('hello world!\n')
         while True:
             time.sleep(3)
+            # log()
+            ##################
             # Your script here
-            log()
+            ##################
 
     def check(self):
-        if not self.is_alive:
+        if not self.is_alive():
             self.restart()
 
 
@@ -128,6 +132,8 @@ def main():
             w.restart()
         elif command == 'status':
             w.status()
+        elif command == 'check':
+            w.check()
     else:
         w.start()
 
