@@ -74,12 +74,32 @@ class Daemon(object):
         self.stop()
         self.start()
 
+    def status(self):
+        self.pid = self.get_pid()
+        if self.pid:
+            print('Daemon is running.')
+            return True
+        else:
+            print('Daemon is not running.')
+            return False
+
+    def is_alive(self):
+        return self.status
+
+    def get_pid(self):
+        try:
+            with open('daemon.pid', 'r') as f:
+                return int(f.read())
+        except IOError:
+            return
+
     def run(self):
         """ Override """
         pass
 
 
 class Worker(Daemon):
+
     def run(self):
         def log():
             with open('daemon.log', 'a+') as f:
@@ -88,6 +108,10 @@ class Worker(Daemon):
             time.sleep(3)
             # Your script here
             log()
+
+    def check(self):
+        if not self.is_alive:
+            self.restart()
 
 
 def main():
@@ -102,6 +126,8 @@ def main():
             w.stop()
         elif command == 'restart':
             w.restart()
+        elif command == 'status':
+            w.status()
     else:
         w.start()
 
