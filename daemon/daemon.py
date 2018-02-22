@@ -10,34 +10,39 @@
 
 
 import os
-# import signal
+import signal
 import sys
 import time
 
 
 class Daemon(object):
+    """ A base daemon class
+    Subclass and override run() to set your task.
+    """
     def __init__(self):
         self.pid = None
+        self.sid = None
 
     def daemonize(self):
         self.pid = os.fork()
         assert self.pid != -1
         # exit parent process
         if self.pid > 0:
-            print('Exit parent process.')
+            print('Child process id: {}'.format(self.pid))
             time.sleep(5)
+            # pid turn to 0
             sys.exit(0)
 
         os.umask(0)
 
-        sid = os.setsid()
-        assert sid != -1
+        self.sid = os.setsid()
+        assert self.sid != -1
         # signal.signal(signal.SIGHUP, signal.SIGIGN)
         # os.chdir('/')
 
+        self.pid = os.getpid()
         with open('daemon.pid', 'w+') as f:
             f.write(str(self.pid))
-        print('Start daemon pid: {}'.format(self.pid))
 
         sys.stdin.close()
         sys.stdout.close()
@@ -47,14 +52,30 @@ class Daemon(object):
         try:
             p = open('daemon.pid', 'r')
             self.pid = int(p.read())
-            print('Read daemon id: {}'.format(self.pid))
             p.close()
-        except Exception as e:
-            print(e)
+        except IOError:
             self.daemonize()
             self.run()
+        else:
+            print('Daemon already started.')
+
+    def stop(self):
+        try:
+            with open('daemon.pid', 'r') as f:
+                self.pid = int(f.read())
+            os.remove('daemon.pid')
+        except (IOError, OSError):
+            # print(e)
+            print('Daemon not exist.')
+        else:
+            os.kill(self.pid, signal.SIGTERM)
+
+    def restart(self):
+        self.stop()
+        self.start()
 
     def run(self):
+        """ Override """
         pass
 
 
@@ -71,7 +92,18 @@ class Worker(Daemon):
 
 def main():
     w = Worker()
-    w.start()
+    if os.name != 'posix':
+        raise Exception('Daemon only works on Unix.')
+    if len(sys.argv) == 2:
+        command = sys.argv[1]
+        if command == 'start':
+            w.start()
+        elif command == 'stop':
+            w.stop()
+        elif command == 'restart':
+            w.restart()
+    else:
+        w.start()
 
 
 if __name__ == '__main__':
