@@ -34,8 +34,18 @@ PyQt 应用范围很广，代码量也从少至几十行多至十万行。总的
 
 Python 基础
 ===========
-.. Bytes, Unicode, QString 20
+
+Bytestrings, Unicode Strings, QStrings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+qstring 已过时
+
 .. partial function app 63
+::
+    def partial(func, arg):
+        def call():
+            return func(arg)
+        return call
 
 基本的 GUI 编程
 ==============
