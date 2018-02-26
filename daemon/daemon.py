@@ -21,9 +21,11 @@ class Daemon(object):
     """ A base daemon class
     Subclass and override run() to set your task.
     """
+
     def __init__(self):
         self.pid = None
         self.sid = None
+        self.log_file = 'daemon.log'
 
     def daemonize(self):
         self.pid = os.fork()
@@ -47,8 +49,22 @@ class Daemon(object):
             f.write(str(self.pid))
 
         sys.stdin.close()
-        sys.stdout.close()
-        sys.stderr.close()
+        # sys.stdout.close()
+        # sys.stderr.close()
+        try:
+            self.freopen(self.log_file, 'a', sys.stdout)
+            self.freopen(self.log_file, 'a', sys.stderr)
+        except IOError as e:
+            print(e)
+
+    def freopen(self, f, mode, stream):
+        """ log reopen
+        """
+        newf = open(f, mode)
+        newfd = newf.fileno()
+        oldfd = stream.fileno()
+        os.close(oldfd)
+        os.dup2(newfd, oldfd)
 
     def start(self):
         try:
@@ -65,12 +81,15 @@ class Daemon(object):
         try:
             with open('daemon.pid', 'r') as f:
                 self.pid = int(f.read())
-            os.remove('daemon.pid')
-        except (IOError, OSError):
-            # print(e)
-            print('Daemon not exist.')
+        except FileNotFoundError as e:
+            print('PID file not exist.')
         else:
-            os.kill(self.pid, signal.SIGTERM)
+            os.remove('daemon.pid')
+            try:
+                os.kill(self.pid, signal.SIGTERM)
+            except (OSError, ProcessLookupError):
+                # print(e)
+                print('Daemon not exist.')
 
     def restart(self):
         self.stop()
@@ -103,12 +122,15 @@ class Daemon(object):
 class Worker(Daemon):
 
     def run(self):
-        # def log():
-        #     with open('daemon.log', 'a+') as f:
-        #         f.write('hello world!\n')
+        count = 0
+
+        def log(count):
+            with open('daemon.log', 'a+') as f:
+                f.write('{}. hello world!\n'.format(count))
         while True:
             time.sleep(3)
-            # log()
+            count += 1
+            log()
             ##################
             # Your script here
             ##################
