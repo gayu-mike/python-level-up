@@ -25,14 +25,15 @@ class Daemon(object):
     def __init__(self):
         self.pid = None
         self.sid = None
-        self.log_file = 'daemon.log'
+        self.log_file = '/var/log/shensu.log'
+        self.pid_file = '/var/run/shenfu.pid'
 
     def daemonize(self):
         self.pid = os.fork()
         assert self.pid != -1
+
         # exit parent process
         if self.pid > 0:
-            print('Child process id: {}'.format(self.pid))
             time.sleep(5)
             # pid turn to 0
             sys.exit(0)
