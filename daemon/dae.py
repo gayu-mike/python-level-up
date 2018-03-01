@@ -26,8 +26,6 @@ def to_str(b):
 
 
 def daemon_exec(config):
-    logging.basicConfig(level=logging.WARNING)
-
     if os.name != 'posix':
         raise Exception('Daemon only works on Unix.')
     command = config.get('command')
@@ -194,14 +192,13 @@ def daemon_stop(pid_file):
         except OSError as e:
             if e.errno == errno.ESRCH:
                 break
-        time.sleep(0.5)
+        time.sleep(0.05)
     else:
         logging.error('Time out when stopping {}'.format(pid))
         sys.exit(1)
 
     print('[{}] Stopped.'.format(pid))
-    # _remove_pid_file(pid_file)
-    os.unlink(pid_file)
+    _remove_pid_file(pid_file)
 
 
 def daemon_restart(pid_file, log_file):
