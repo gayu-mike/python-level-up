@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject
 from PyQt5.QtWidgets import QApplication, QDial, QDialog, QHBoxLayout, QSpinBox
 
 
@@ -52,16 +52,47 @@ class Form(QDialog):
         self.spinbox.valueChanged.connect(self.dial.setValue)
         # user-defined signal and user-defined slot
         self.spinbox.atzero.connect(self.announce)
+        self.dial.valueChanged.connect(self.spinbox.alert)
 
     @pyqtSlot(int)
     def announce(self, nzero):
         print('nzero: {}'.format(nzero))
 
 
+class TaxRate(QObject):
+    change_rate = pyqtSignal(float)
+
+    def __init__(self):
+        super().__init__()
+        self._rate = 10.0
+
+    def rate(self):
+        return self._rate
+
+    def set_rate(self, rate):
+        if rate != self._rate:
+            self._rate = rate
+            self.change_rate.emit(self._rate)
+
+
+def get_rate(val):
+    """ slot could be any callable """
+    print('rate: {}'.format(val))
+
+
+def non_gui():
+    t = TaxRate()
+    t.change_rate.connect(get_rate)
+    # call a function that emit a signal
+    t.set_rate(1.0)
+    t.set_rate(1.0)
+
+
 def main(cli):
     app = QApplication(cli)
     form = Form()
     form.show()
+    non_gui()
     sys.exit(app.exec_())
 
 
