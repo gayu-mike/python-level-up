@@ -25,8 +25,8 @@ class Daemon(object):
     def __init__(self):
         self.pid = None
         self.sid = None
-        self.log_file = '/var/log/shensu.log'
-        self.pid_file = '/var/run/shenfu.pid'
+        self.log_file = '/var/log/daemon.log'
+        self.pid_file = '/var/run/daemon.pid'
 
     def daemonize(self):
         self.pid = os.fork()
@@ -59,7 +59,7 @@ class Daemon(object):
             print(e)
 
     def freopen(self, f, mode, stream):
-        """ log reopen
+        """ redirect log
         """
         newf = open(f, mode)
         newfd = newf.fileno()
@@ -82,13 +82,13 @@ class Daemon(object):
         try:
             with open('daemon.pid', 'r') as f:
                 self.pid = int(f.read())
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             print('PID file not exist.')
         else:
             os.remove('daemon.pid')
             try:
                 os.kill(self.pid, signal.SIGTERM)
-            except (OSError, ProcessLookupError):
+            except (IOError, OSError, ProcessLookupError):
                 # print(e)
                 print('Daemon not exist.')
 
