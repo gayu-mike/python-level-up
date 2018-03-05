@@ -42,7 +42,6 @@ Qt Designer、如何保存数据。
 第 8 章讲文件系统，至少要读前 3 部分 
 第 10 章至少读第一部分，第 11 章读完，它们讲解事件机制.
 
-
 -----------
 Python 基础
 -----------
@@ -55,11 +54,12 @@ qstring 已过时.
 
 partial function app at page 63.
 
-    _code-block::python
-        def partial(func, arg):
-            def call():
-                return func(arg)
-            return call
+.. code-block:: python
+
+    def partial(func, arg):
+        def call():
+            return func(arg)
+        return call
 
 --------------
 基本的 GUI 编程
@@ -77,7 +77,7 @@ signals / slots
 信号函数的定义有点类似 C 的函数声明, `()` 表示空, 如果接受参数, 就要定义
 参数类型 `()`.
 
-.. _code-block:: python
+.. code-block:: python
 
     from PyQt5.QtCore import pyqtSignal, pyqtSlot
 
@@ -89,7 +89,7 @@ signals / slots
 slot 可以是任何的 callable(比如普通的 python 函数). 所以列出以下两种形式, 
 (接上面)
 
-.. _code-block:: python
+.. code-block:: python
 
     @pyqtSlot(int)
     def slot1(self, val):
@@ -97,6 +97,34 @@ slot 可以是任何的 callable(比如普通的 python 函数). 所以列出以
 
     def slot2(self, s, li):
         return s.join(li)
+
+^^^^^^^^^^^^^^^^^
+signals and slots
+^^^^^^^^^^^^^^^^^
+
+gui 编程中一个重要概念是 event(事件), 比如当你 click 一个 button, 这时候按钮的“坐标 
+/ ctrl 键的状态 / 此刻的时间” 等数据产生.  事件就是一些操作, 并且会产生数据或者一些效果.
+  不同的事件产生不同的数据.
+
+事件的处理很复杂, 比如点击按钮, 需要处理鼠标坐标计算, 单击还是双击等等. 
+这在 Qt 中有相应的 event 机制. 另外为了编程方便, Qt 抽象出 signal/slot 机制. 
+
+语法是::
+.. code-block:: python
+
+    # signal_name.connect(slot_name)
+    dial.valueChanged.connect(spinbox.setValue)
+
+    # can also call natual python function
+    def hello():
+        print('hello')
+
+    btn.clicked.connect(hello)
+
+singal / slot 的连接是可以 n 对 n 的. 
+signal 可以传递任意类型/任意数目的参数. 
+slot 接受的参数 <= signal 的参数, 并且对应的参数类型必须相同. 
+
 
 ~~~~~
 对话框
@@ -106,56 +134,74 @@ slot 可以是任何的 callable(比如普通的 python 函数). 所以列出以
 主窗口
 ~~~~~
 
+~~~~~~~~~~~~~~~~
 使用 Qt Designer
 ~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~
 数据和自定义文件格式
 ~~~~~~~~~~~~~~~~~
 
+-----------
 GUI 编程进阶
 -----------
 
+~~~~~~~~~~
 布局和多文档
 ~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 事件, Clipboard, Drag and Drop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~
 自定义控件
 ~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~
 Item-Based Graphics
 ~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~
 富文本和打印
 ~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~
 Model / View Programming
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~
 数据库
 ~~~~~
 
+------------
 高阶 GUI 编程
 ------------
 
+~~~~~~~~~~~
 高阶 MV 模式
 ~~~~~~~~~~~
 
+~~~~~~~~~~~~~~
 在线帮助和国际化
 ~~~~~~~~~~~~~~
 
+~~~~
 网络
 ~~~~
 
+~~~~~~
 多线程
 ~~~~~~
 
+~~~~~~~~~~
 附录 A 安装
 ~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~
 附录 B 选择 PyQt 控件
 ~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 附录 C 选择的 PyQt 类继承树
 ~~~~~~~~~~~~~~~~~~~~~~~~~
