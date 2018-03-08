@@ -5,10 +5,10 @@ Rapid GUI Programming With PyQt
 前言
 ----
 
-PyQt 的文档有所有类的 API，这本书介绍了如何使用它们来编程。  最初我使用 SWIG 来绑定 
- Python 和 Qt，我的目的是用 C++ 写的 Qt 代码可以用更 Pythonic 的形式实现。  于是我 
-造了 SIP ，它是一个代码生成器，你能用 C++ 写的 Qt 程序都能用 Python 实现。  现在 
- PyQt 已经相对稳定，未来几年都会持续跟进 Qt 的发行。
+PyQt 的文档有所有类的 API，这本书介绍了如何使用它们来编程。  最初我使用 SWIG 来绑定
+Python 和 Qt，我的目的是用 C++ 写的 Qt 代码可以用更 Pythonic 的形式实现。  于是我
+造了 SIP ，它是一个代码生成器，你能用 C++ 写的 Qt 程序都能用 Python 实现。  现在
+PyQt 已经相对稳定，未来几年都会持续跟进 Qt 的发行。
     PyQt 的作者 Phil Thompson 2007
 
 ----
@@ -80,7 +80,8 @@ gui 编程中一个重要概念是 event(事件), 比如当你 click 一个 butt
 事件的处理很复杂, 比如点击按钮, 需要处理鼠标坐标计算, 单击还是双击等等. 
 这在 Qt 中有相应的 event 机制. 另外为了编程方便, Qt 抽象出 signal/slot 机制. 
 
-语法是::
+语法是
+
 .. code-block:: python
 
     # signal_name.connect(slot_name)
