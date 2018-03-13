@@ -1,0 +1,128 @@
+.. _tutorial:
+
+Tutotial
+========
+
+- :ref:`开胃菜 _<https://github.com/gayu-mike/python-level-up/tree/master/tutorial/intro.rst>`
+- :ref:`Using the Python Interpreter <interpreter>`
+    - Invoking the Interpreter
+        - Argument Passing
+        - Interactive Mode
+    - The Interpreter and Its Environment
+        - Source Code Encoding
+- An Informal Introduction to Python
+    - Using Python as a Calculator
+        - Numbers
+        - :ref:`Strings <Strings>`
+        - Lists
+    - First Steps Towards Programming
+- More Control Flow Tools
+    - if
+    - for
+    - range()
+    - break / continue, else Clauses
+    - pass
+    - Defining Functions
+    - More on Defining Functions
+        - Default Argument Values
+        - Keyword Arguments
+        - Arbitrary Argument Lists
+        - Unpacking Argument Lists
+        - Unpacking Expressions
+        - Documentation Strings
+        - Function Annotations
+    - Coding Style
+- Data Structure
+    - More on Lists
+        - as Stacks
+        - as Queues
+        - List Comprehensions
+        - Nested List Comprehensions
+    - The del Statement
+    - Tuples and Sequences
+    - Sets
+    - Dictionaries
+    - Looping Techniques
+    - More on Conditions
+    - Comparing Sequences and Other Types
+- modules
+    - more on modules
+        - executing as scripts
+        - search path
+        - "compiled" python files
+    - standard modules
+    - dir()
+    - packages
+        - import *
+        - intra-package ref
+        - packages and multiple dirs
+- input / output
+    - fancier output format
+        - old string format
+    - r / w files
+        - methods of file objects
+        - json
+- errors / exceptions
+    - syntax errors
+    - exceptions
+    - handle exceptions
+    - raising exceptions
+    - user-defined exceptions
+    - define clean-up actions
+    - predefined clean-up
+- classes
+    - a word about names and objects
+    - scopes and namespaces
+        - examples
+    - a first look at classes
+        - definition
+        - class objects
+        - instance obj
+        - method obj
+        - class and instance vars
+    - random remarks
+    - inheritance
+        - multiple inheritance
+    - private vars
+    - odds and ends
+    - iterators
+    - generators
+    - generator expressions
+- biref tour of std lib
+    - os interface
+    - file wildcards
+    - cli args
+    - err output redirections / terminate program
+    - string pattern match
+    - mathematics
+    - internet access
+    - dates / times
+    - data compression
+    - performance measurement
+    - quality control
+    - batteries included
+- brief tour of stdlib 2
+    - output formatting
+    - templating
+    - working with bin data
+    - multi-threading
+    - logging
+    - weak refenrence
+    - tools for lists
+    - decimal floating point arithmetic
+- virtualenv / packages
+    - intro
+    - creating venv
+    - pip
+- what's now
+- interactive input editing and history substitution
+    - tab completion
+    - alternatives to interactive interpreter
+- floating point: issues / limitation
+    representation error
+- appendix
+    - interactive mode
+        - err handle
+        - executable python script
+        - interactive startup file
+        - customization modules
