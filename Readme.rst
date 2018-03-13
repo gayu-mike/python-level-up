@@ -25,5 +25,5 @@ Python是一门自带高级数据结构、面向对象、动态、解释型语�
 以及更详细的
 `Python/C API Reference Manual <https://docs.python.org/3/c-api/index.html#c-api-index>`_.
 
-最后, 这张`Glossary <https://docs.python.org/3/glossary.html#glossary>`_
+最后, 这张 `Glossary <https://docs.python.org/3/glossary.html#glossary>`_
 列出了Python相关的术语, 以供查阅.
