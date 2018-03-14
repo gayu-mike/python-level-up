@@ -69,7 +69,9 @@ class TaxRate(QObject):
     def rate(self):
         return self._rate
 
+    @pyqtSlot(float)
     def set_rate(self, rate):
+        """ this method emit signal """
         if rate != self._rate:
             self._rate = rate
             self.change_rate.emit(self._rate)
