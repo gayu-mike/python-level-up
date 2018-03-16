@@ -253,6 +253,43 @@ C语言有pointer类型而Python没有, 下面就来看看ctypes中的pointer.
 structure
 .........
 
+ctypes里提供了``Structure``类和``Union``类, 结构体的成员使用``_fields_``属
+性来定义. fields必须是一个``list``, 里面的每个元素都是一个``2-tuple``,
+tuple中的2个元素分别是: member name / member type
+
+.. code-block:: python3
+
+    class POINT(Structure):
+         _fields_ = [("x", c_int),
+                     ("y", c_int)]
+
+    >>> point = POINT(10, 20)
+    >>> print(point.x, point.y)
+    10 20
+    >>> point = POINT(y=5)
+    >>> print(point.x, point.y)
+    0 5
+    >>> POINT(1, 2, 3)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    ValueError: too many initializers
+
+当然, 和C一样, 也可以把结构体作为结构体成员:
+
+    class RECT(Structure):
+        _fields_ = [
+            ('upperleft', POINT),
+            ('lowerright', POINT)
+        ]
+
+    >>> rc = RECT(point)
+    >>> print(rc.upperleft.x, rc.upperleft.y)
+    0 5
+    >>> print(rc.lowerright.x, rc.lowerright.y)
+    0 0
+    >>> r = RECT(POINT(1, 2), POINT(3, 4))
+    >>> r = RECT((1, 2), (3, 4))
+
 ........
 callback
 ........
