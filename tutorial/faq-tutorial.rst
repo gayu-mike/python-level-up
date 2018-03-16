@@ -1,10 +1,13 @@
 - what environment/lib an interpreter use
+    - CPython运行一个程序的时候, 会载入什么?
+    - 比如: buildin? sys.argv?
 - how to present/use octal/hex
 - str/char in python
 - reconstruce my article of arguments
 - pack and unpack arguments
 - where can i use lambda
-- my style to use doc string
+    - 没什么屌用
+- my style to    use doc string
 - what is function annotations?
 - guido's recommanded code style, pep8 or more than pep8
 - differences between stack and queue

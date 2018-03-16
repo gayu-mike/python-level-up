@@ -3,8 +3,8 @@
 Tutotial
 ========
 
-- :ref:`开胃菜 _<https://github.com/gayu-mike/python-level-up/tree/master/tutorial/intro.rst>`
-- :ref:`Using the Python Interpreter <interpreter>`
+- `开胃菜 _<https://github.com/gayu-mike/python-level-up/tree/master/tutorial/intro.rst>`
+- `Using the Python Interpreter`
     - Invoking the Interpreter
         - Argument Passing
         - Interactive Mode

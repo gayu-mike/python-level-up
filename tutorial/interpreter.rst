@@ -3,6 +3,23 @@
 Python解释器
 ===========
 
+Argument Passing
+----------------
+
+.. code-block:: console
+
+    $ python main.py --debug
+
+向Python解释器传参, 参数存放在sys.argv里面, 它是一个list.
+比如上面的命令:
+
+.. code-block:: python3
+
+    import sys
+    print(sys.argv)
+
+    >>> ['main.py', '--debug']
+
 source code encoding
 --------------------
 
