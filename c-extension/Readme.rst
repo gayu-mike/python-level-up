@@ -249,6 +249,49 @@ C语言有pointer类型而Python没有, 下面就来看看ctypes中的pointer.
 类型转换
 .......
 
+ctypes做严格的类型检查, 就是说: 如果参数/返回值指定了一个类型, 那么值必须是这个类型.
+(这里我们可以单纯用C语言的思维来理解.)
+
+另外有个也比较符合C语言的特例, 就是指针和数组作为参数传入时可以视为等同:
+
+.. code-block:: python3
+
+    class Bar(Structure):
+        _fields_ = [('count', c_int), ('values', POINTER(c_int))]
+
+    bar = Bar()
+    bar.count = 3
+    bar.values = (c_int * 3)(1, 2, 3)
+    for i in range(bar.count):
+        print(bar.values[i])
+
+    # null pointer
+    bar.values = None
+
+.. todo::
+    pointer c_int and c_int and byref()
+
+因此, 有时我们需要类型转换. Python内置了一些类型转换的函数:
+
+.. code-block:: python3
+
+    >>> i = c_int(1)
+    >>> float(i.value)
+    1.0
+    >>> str(i.value)
+    '1'
+
+同时, 也提供了和C语言一样的 ``cast``, 转换指针对象里面的数据类型:
+
+.. code-block:: python3
+
+    >>> a = (c_byte * 4)()
+    >>> a
+    <__main__.c_byte_Array_5 object at 0x0000000002875648>
+    >>> b = cast(a, POINTER(c_int))     # cast() returns a new object
+    >>> b
+    <__main__.LP_c_long object at 0x00000000028756C8>
+
 .........
 structure
 .........
