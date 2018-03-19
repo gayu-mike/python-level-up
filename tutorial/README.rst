@@ -3,7 +3,7 @@
 Tutotial
 ========
 
-- `开胃菜 _<https://github.com/gayu-mike/python-level-up/tree/master/tutorial/intro.rst>`
+- `开胃菜 <https://github.com/gayu-mike/python-level-up/tree/master/tutorial/intro.rst>`_
 - `Using the Python Interpreter`
     - Invoking the Interpreter
         - Argument Passing
@@ -13,7 +13,7 @@ Tutotial
 - An Informal Introduction to Python
     - Using Python as a Calculator
         - Numbers
-        - :ref:`Strings <Strings>`
+        - `字符串 <https://github.com/gayu-mike/python-level-up/tree/master/tutorial/string.rst>`_
         - Lists
     - First Steps Towards Programming
 - More Control Flow Tools
@@ -22,7 +22,7 @@ Tutotial
     - range()
     - break / continue, else Clauses
     - pass
-    - Defining Functions
+    - `函数 <https://github.com/gayu-mike/python-level-up/tree/master/tutorial/function.rst>`_
     - More on Defining Functions
         - Default Argument Values
         - Keyword Arguments
@@ -31,7 +31,7 @@ Tutotial
         - Unpacking Expressions
         - Documentation Strings
         - Function Annotations
-    - Coding Style
+    - `Coding Style <https://github.com/gayu-mike/python-level-up/tree/master/tutorial/pep8.rst>`_
 - Data Structure
     - More on Lists
         - as Stacks
