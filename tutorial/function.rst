@@ -48,34 +48,47 @@ lambda与之唯一不同的是, *不需要给它绑定一个变量名, 所以它
 docstring
 ---------
 
-去看看这个无聊的程序 ``docstring.py``, 运行结果:
+去看看这个无聊的程序 ``docstring.py``, 这里直接给出一个标准的写法:
 
 .. code-block:: python3
 
-    Do nothing.
+    def function():
+        """ Short description.
 
-        Hello
-        world.
-        
+        More details here.
+        And the following lines uses
+        the same indentation.
+        """
+        return
 
-    Do nothing.
-        Hello
-        world.
-        
+function annotations
+--------------------
 
-    Do nothing.
+先看看这个例子:
 
-            Hello
-            world.
-        
+.. code-block:: python3
 
-    Do nothing.
+    >>> def power(x: int, y: int = 2) -> int:
+            return x ** y
+    >>> power.__annotations__
+    {'x': <class 'int'>, 'y': <class 'int'>, 'return': <class 'int'>}
+    >>> help(power)
+    fun(x:int, y:int=2) -> int
 
-        Hello
-            world.
-        
+这里我们可以看到, 函数有一个 ``__annotations__`` 的属性, 它是一个dict,
+包含函数的参数、返回值. 定义annotations的方法是:
 
-    Do nothing.
+- parameter: 参数后加 `: 类型`
+- return: 函数的 `()` 和 `:` 之间使用 `-> 类型`
 
-            Hello
-        world.
+.. note::
+    其实这样的用法比较少见, 因为Python是一门动态语言(尽管这只是注释而不是限定类型).
+    有时候遇到需要说明类型的情况下, 会在docstring中看到函数参数、变量、返回值的类型说明.
+    
+    但动态语言为人诟病的其中一点就是, 在所谓大型工程中, 动态类型不利于工程师阅读代码的时候明确
+    一个函数接收什么类型. 有时候duck type并不会报错, 但实际传入的类型不正确, 这样就会把问题
+    “隐藏”, 可能导致难以debug.
+    
+    Instagram在Pycon中提到, 使用annotations来避免上面这个问题.
+
+

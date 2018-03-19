@@ -7,9 +7,12 @@
 - pack and unpack arguments
 - where can i use lambda
     - 没什么屌用
-- my style to    use doc string
+- my style to use doc string
+    - 确定了标准写法
 - what is function annotations?
+    - 函数类型注释
 - guido's recommanded code style, pep8 or more than pep8
+    - 几点特别重要的简单说明
 - differences between stack and queue
 - recall c implementation of stack, and try queue
 - what's Nested List Comprehensions

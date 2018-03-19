@@ -1,3 +1,33 @@
+"""
+    Do nothing.
+
+        Hello
+        world.
+        
+
+    Do nothing.
+        Hello
+        world.
+        
+
+    Do nothing.
+
+            Hello
+            world.
+        
+
+    Do nothing.
+
+        Hello
+            world.
+        
+
+    Do nothing.
+
+            Hello
+        world.
+"""
+
 def func1():
     """Do nothing.
 
