@@ -23,20 +23,22 @@ Python 2 / 3 的现状是:
 Python2 的使用者, 要学会兼容 Python2.7 .
 
 .. note::
-
     另外看看下面3个链接:
 
     - `我的项目中可以使用Python3吗? <https://caniusepython3.com/>`_
     - `更多 <https://wiki.python.org/moin/Python2orPython3>`_
     - `写2/3兼容的代码 <https://docs.python.org/3/howto/pyporting.html>`_
 
-当我们谈到Python的时候, 不仅仅指代码本身, 还指Python的实现(我的粗略理解是解释器): 
+当我们谈到Python的时候, 不仅仅指代码本身, 还指Python的实现(我的粗略理解是解释器和库): 
 
 - CPython
 - PyPy
 - Jython
 - IronPython
 - PythonNet
+
+于是我们选择安装CPython, 并且从上文可知, 我们讨论安装Python3.
+
 
 ~~~~~
 编辑器
