@@ -87,9 +87,9 @@ values之间存在映射, sorted对proxy values排序, 再输出所映射的orig
 这就给排序的方式提供了很大的灵活度. 比如
 `自定义一个函数来实现自己想要的排序方式 <https://github.com/gayu-mike/python-level-up/tree/master/further-reading/sorting.py>`_
 
----
+----
 元组
----
+----
 
 .. code-block:: python3
 
@@ -129,7 +129,8 @@ list comprehension有时候可以让代码显得更简洁(并且比等价的for-
         result = []
         for n in nums:
             if n % 2 != 0:
-                result.append(n * n)
+                value = '{}*{}={}'.format(n, n, n * n)
+                result.append(value)
         return result
 
     odd_squares = odd(nums)
