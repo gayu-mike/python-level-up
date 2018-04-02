@@ -5,6 +5,19 @@
 
 **一个进程占有一个存储空间, 一个进程可以拥有多个线程, 线程共有这个存储空间.**
 
+threading.Thread()
+
+target / name / daemon
+
+t.join() / t.start()
+
+threading.current_thread / main_thread / enumerate 
+
+class Thread / Timer
+
+'signal' for thread
+Lock
+
 多线程
 -----
 
@@ -24,13 +37,13 @@
     t.join()
     print('Wait for child thread.')
 
-另一种写法(存在线程上下文的复杂问题, 暂时不使用):
+另一种写法(存在线程上下文的复杂问题)是继承 ``Thread`` 类, 如果要和:
 
 .. code-block:: python3
 
     class Alert(threading.Thread):
         def __init__(self, msg):
-            threading.Thread.__init__(self)
+            threading.Thread.__init__()
             self.msg = msg
 
         def run(self):
