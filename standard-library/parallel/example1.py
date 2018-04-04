@@ -16,7 +16,7 @@ print('Wait for child thread.')
 
 class Alert(threading.Thread):
     def __init__(self, msg):
-        threading.Thread.__init__(self)
+        threading.Thread.__init__()
         self.msg = msg
 
     def run(self):
