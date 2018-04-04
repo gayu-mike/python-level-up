@@ -1,0 +1,54 @@
+- func and const
+- conn obj
+- cursor obj
+- row obj
+- except
+- sqlite and python types
+- control transaction
+- methods
+- access columns by name (instead of index)
+- conn as context
+- multithreading
+
+
+Connection:
+    - cursor()
+    - commit()
+    - close()
+    - shortcuts (implicitly create cursor)
+        - conn.excute()
+        - conn.excutemany()
+        - conn.excutescript()
+
+Cursor:
+    - execute()
+    - executemany()
+    - fetchone()
+    - fetchall()
+
+Row:
+
+.. code-block:: python3
+
+    # Using index
+    for row in cursor:
+        print(row[0])
+
+    # Using name
+    cursor.execute('SELECT')
+
+
+SQLite Types / Python Types:
+    - NULL / None
+    - INTEGER / int
+    - REAL / float
+    - TEXT / str
+    - BLOB / bytes
+
+So... If you want to store other data types,
+use Adapter:
+    - basics
+        - cls.__comform__(self, sqlite3.PrepareProtocol)
+        - sqlite3.register_adapter(<native_type>, <callable>)
+    - custom python data type
+    - date / datetime adapters
