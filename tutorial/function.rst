@@ -84,7 +84,11 @@ args 后面还可以定义参数, 但必须是Keyword Arguments.
 docstring
 ---------
 
-去看看这个无聊的程序 ``docstring.py``, 这里直接给出一个标准的写法:
+*docstring* 是给类/函数注释的方法, 在交互模式下使用 ``help(some_function)``
+或者 ``pydoc module.some_function`` 或者 ``some_function.__doc__`` 属性可以查看.
+
+`docstring.py <https://github.com/gayu-mike/python-level-up/blob/master/tutorial/function.rst>`_
+中展示了 *docstring* 的多种格式, 不过建议使用下面的写法并保持一致性:
 
 .. code-block:: python3
 
@@ -95,7 +99,7 @@ docstring
         And the following lines uses
         the same indentation.
         """
-        return
+        pass
 
 function annotations
 --------------------
@@ -114,8 +118,8 @@ function annotations
 这里我们可以看到, 函数有一个 ``__annotations__`` 的属性, 它是一个dict,
 包含函数的参数、返回值. 定义annotations的方法是:
 
-- parameter: 参数后加 `: 类型`
-- return: 函数的 `()` 和 `:` 之间使用 `-> 类型`
+- parameter: `<argument>: <type>`
+- return: `<function>() -> <type>:`
 
 .. note::
     其实这样的用法比较少见, 因为Python是一门动态语言(尽管这只是注释而不是限定类型).

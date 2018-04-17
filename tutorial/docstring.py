@@ -1,33 +1,3 @@
-"""
-    Do nothing.
-
-        Hello
-        world.
-        
-
-    Do nothing.
-        Hello
-        world.
-        
-
-    Do nothing.
-
-            Hello
-            world.
-        
-
-    Do nothing.
-
-        Hello
-            world.
-        
-
-    Do nothing.
-
-            Hello
-        world.
-"""
-
 def func1():
     """Do nothing.
 
@@ -37,12 +7,25 @@ def func1():
     pass
 
 
+# Do nothing.
+#
+#     Hello
+#     world.
+print(func1.__doc__)
+
+
 def func2():
     """Do nothing.
     Hello
     world.
     """
     pass
+
+
+# Do nothing.
+#     Hello
+#     world.
+print(func2.__doc__)
 
 
 def func3():
@@ -54,6 +37,13 @@ def func3():
     pass
 
 
+# Do nothing.
+#
+#         Hello
+#         world.
+print(func3.__doc__)
+
+
 def func4():
     """Do nothing.
 
@@ -61,6 +51,13 @@ def func4():
         world.
     """
     pass
+
+
+# Do nothing.
+#
+#     Hello
+#         world.
+print(func4.__doc__)
 
 
 def func5():
@@ -72,12 +69,8 @@ def func5():
     pass
 
 
-print(func1.__doc__)
-print()
-print(func2.__doc__)
-print()
-print(func3.__doc__)
-print()
-print(func4.__doc__)
-print()
+# Do nothing.
+
+#         Hello
+#     world.
 print(func5.__doc__)
