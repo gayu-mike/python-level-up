@@ -87,7 +87,7 @@ docstring
 *docstring* 是给类/函数注释的方法, 在交互模式下使用 ``help(some_function)``
 或者 ``pydoc module.some_function`` 或者 ``some_function.__doc__`` 属性可以查看.
 
-`docstring.py <https://github.com/gayu-mike/python-level-up/blob/master/tutorial/function.rst>`_
+`docstring.py <https://github.com/gayu-mike/python-level-up/blob/master/tutorial/docstring.py>`_
 中展示了 *docstring* 的多种格式, 不过建议使用下面的写法并保持一致性:
 
 .. code-block:: python3
