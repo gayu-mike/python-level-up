@@ -29,6 +29,7 @@ Tutotial
         - Arbitrary Argument Lists
         - Unpacking Argument Lists
         - Unpacking Expressions
+        - `lambda 函数 <https://github.com/gayu-mike/python-level-up/blob/master/tutorial/lambda.rst>`_
         - Documentation Strings
         - Function Annotations
     - `Coding Style <https://github.com/gayu-mike/python-level-up/tree/master/tutorial/pep8.rst>`_
